@@ -16,7 +16,7 @@ public class VentanaInicio extends JFrame implements ActionListener
 
 	private JLabel lbl_usuario,lbl_contra,lbl_mensaje;
 	private JTextField tf_usuario;
-	private JPasswordField contraseña;
+	private JPasswordField contra;
 	private JButton btn_aceptar;
 	private Icon b=new ImageIcon("feliz.jpg");
 	private Icon t=new ImageIcon("xd.png");
@@ -31,10 +31,10 @@ public class VentanaInicio extends JFrame implements ActionListener
 		
 		//controles
 		lbl_usuario=new JLabel("nombre de usuario");
-		lbl_contra=new JLabel("contraseña");
+		lbl_contra=new JLabel("contrasena");
 		
 		tf_usuario=new JTextField(20);
-		contraseña=new JPasswordField(20);
+		contra=new JPasswordField(20);
 		lbl_mensaje=new JLabel(i);
 		btn_aceptar=new JButton("Aceptar");
 		btn_aceptar.addActionListener(this);
@@ -42,7 +42,7 @@ public class VentanaInicio extends JFrame implements ActionListener
 		add(lbl_usuario);
         add(lbl_contra);
         add(tf_usuario);
-        add(contraseña);
+        add(contra);
         add(btn_aceptar);
         add(lbl_mensaje);
 		
@@ -65,7 +65,7 @@ public class VentanaInicio extends JFrame implements ActionListener
 		if(e.getSource()==btn_aceptar)
 		{
 			String usuario=tf_usuario.getText();
-			String p=String.valueOf(contraseña.getPassword());
+			String p=String.valueOf(contra.getPassword());
 			if(usuario.equals("a") && p.equals("a"))
 			{
 				lbl_mensaje.setIcon(b);
@@ -74,7 +74,13 @@ public class VentanaInicio extends JFrame implements ActionListener
 				lbl_mensaje.setIcon(t);
 			}
 			tf_usuario.setText("");
-			contraseña.setText("");
+			contra.setText("");
+			
+			EncriptaDesencripta enc=new EncriptaDesencripta();//llamando otra clase
+			
+			lbl_contra.setText(enc.encripta(p));
+			
+			lbl_usuario.setText(enc.desencripta(p));
 		}
 		
 	}
